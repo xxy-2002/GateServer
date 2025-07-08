@@ -1,1 +1,21 @@
 [
+{
+  "directory": "d:\\xxy_chat_server\\GateServer",
+  "arguments": ["D:\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-Iinclude", "-isystem", "C:\\Users\\sheny\\AppData\\Local\\.xmake\\packages\\j\\jsoncpp\\1.9.6\\845822435d9e44a38c8326c421a2f12b\\include", "-o", "build\\.objs\\GateServer\\mingw\\x86_64\\debug\\src\\CServer.cpp.obj", "src\\CServer.cpp"],
+  "file": "src\\CServer.cpp"
+},
+{
+  "directory": "d:\\xxy_chat_server\\GateServer",
+  "arguments": ["D:\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-Iinclude", "-isystem", "C:\\Users\\sheny\\AppData\\Local\\.xmake\\packages\\j\\jsoncpp\\1.9.6\\845822435d9e44a38c8326c421a2f12b\\include", "-o", "build\\.objs\\GateServer\\mingw\\x86_64\\debug\\src\\GateServer.cpp.obj", "src\\GateServer.cpp"],
+  "file": "src\\GateServer.cpp"
+},
+{
+  "directory": "d:\\xxy_chat_server\\GateServer",
+  "arguments": ["D:\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-Iinclude", "-isystem", "C:\\Users\\sheny\\AppData\\Local\\.xmake\\packages\\j\\jsoncpp\\1.9.6\\845822435d9e44a38c8326c421a2f12b\\include", "-o", "build\\.objs\\GateServer\\mingw\\x86_64\\debug\\src\\HttpConnnection.cpp.obj", "src\\HttpConnnection.cpp"],
+  "file": "src\\HttpConnnection.cpp"
+},
+{
+  "directory": "d:\\xxy_chat_server\\GateServer",
+  "arguments": ["D:\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-Iinclude", "-isystem", "C:\\Users\\sheny\\AppData\\Local\\.xmake\\packages\\j\\jsoncpp\\1.9.6\\845822435d9e44a38c8326c421a2f12b\\include", "-o", "build\\.objs\\GateServer\\mingw\\x86_64\\debug\\src\\logicsystem.cpp.obj", "src\\logicsystem.cpp"],
+  "file": "src\\logicsystem.cpp"
+}]

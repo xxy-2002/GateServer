@@ -1,10 +1,10 @@
 #include "CServer.h"
+#include "HttpConnection.h"
 
 CServer::CServer(boost::asio::io_context& ioc, unsigned short & port):
     _ioc(ioc), //使用成员初始化列表将传入的 ioc 赋值给类的成员变量 _ioc
     _acceptor(ioc,tcp::endpoint(tcp::v4(),port)),
-    _socket(ioc),//初始化 _socket 对象，它是一个 TCP 套接字，用于与客户端进行通信，使用传入的 ioc 进行初始化。
-    _port(port) //引用的类的成员函数需要如此构造初始化
+    _socket(ioc)//初始化 _socket 对象，它是一个 TCP 套接字，用于与客户端进行通信，使用传入的 ioc 进行初始化。
 {
     
 }
@@ -21,13 +21,14 @@ void CServer::Start()
                 return;
             }
             //创建新链接并且创建来管理这个来链接
-            std::make_shared<HttpConnection>(std::move(_socket))->Start();
+            std::make_shared<HttpConnection>(std::move(self->_socket))->Start();
 
             //继续监听
             self->Start();
         }
         catch(std::exception& exp){
-            std::cout << e.what() << std::endl;
+            std::cout << "exption is "<<exp.what() << std::endl;
+            self->Start();
         }
     });
 }

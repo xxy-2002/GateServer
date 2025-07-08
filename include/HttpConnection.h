@@ -1,14 +1,13 @@
 #pragma once
 #include "const.h"
-
+#include "logicsystem.h"    
 class HttpConnection:public std::enable_shared_from_this<HttpConnection>
 {
-public:
-    friend class LoginSystem; // 声明 LoginSystem 为 HttpConnection 的友元类
-    HttpConnection(tcp::socket socket,LoginSystem* login_system);
+    friend class LogicSystem; // 声明 LogicSystem 为 HttpConnection 的友元类
+    public:
+    HttpConnection(tcp::socket socket);
     void Start();
 private:
-    LoginSystem* _login_system;
     void CheckDeadline();//检查超时
     void WriteResponse();//写响应
     void HandleReq();//处理请求

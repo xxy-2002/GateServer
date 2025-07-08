@@ -4,6 +4,9 @@
 #include <boost/asio.hpp>
 #include <memory>
 #include <iostream>
+#include "singleton.h"
+#include <functional>
+#include <map> // 包含map头文件 
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>

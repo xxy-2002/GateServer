@@ -32,7 +32,7 @@ void HttpConnection::HandleReq()
     _response.keep_alive(false);
     if(_request.method() == http::verb::get){
         //设置响应体
-       bool success =  LoginSystem::GetInstance()->HandleGet(_request.target(),shared_from_this()); //
+       bool success =  LogicSystem::GetInstance()->HandleGet(_request.target(),shared_from_this()); //
         //shared_from_this()：由于 HttpConnection 类继承自 std::enable_shared_from_this<HttpConnection>，shared_from_this() 方法会返回一个指向当前 
         //HttpConnection 对象的 std::shared_ptr，将其作为参数传递给 HandleGet 方法，方便 LoginSystem 与当前连接进行交互。
         if(!success){
@@ -51,7 +51,8 @@ void HttpConnection::HandleReq()
     _response.result(http::status::ok);
     //设置响应体
     _response.set(http::field::content_type,"text/html");
-    _response.body() = "hello world";
+    WriteResponse();//写回包
+    return;
 }
 
 void HttpConnection::WriteResponse(){
@@ -62,7 +63,7 @@ void HttpConnection::WriteResponse(){
         [self](beast::error_code ec,std::size_t bytes_transferred){    //回调函数的作用 1.回调函数是传递给 http::async_write 的 lambda 表达式，其核心作用是在异步操作完成后执行特定逻辑。
             // 此处又没必要try catch 因为async_write 本身就会捕获异常
             self->_socket.shutdown(tcp::socket::shutdown_send,ec); //关闭发送端,只关闭一端
-            self->_deadline.cancel();//取消定时器
+            self->deadline_.cancel();//取消定时器
         });
     
 }
@@ -70,7 +71,7 @@ void HttpConnection::WriteResponse(){
 void HttpConnection::CheckDeadline()
 {
     auto self = shared_from_this();
-    _deadline.async_wait(
+    deadline_.async_wait(
         [self](beast::error_code ec)
         {
             if(!ec){

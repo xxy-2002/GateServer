@@ -1,10 +1,15 @@
 add_rules("mode.debug", "mode.release")
+add_requires("jsoncpp")
 add_includedirs("include")
 
 
-target("xxy_chat_cpp")
+target("GateServer")
+    add_packages("jsoncpp")
     set_kind("binary")
     add_files("src/*.cpp")
+
+    -- 需要添加 Windows 套接字库 
+    add_syslinks("ws2_32", "mswsock")
     
 
 --
