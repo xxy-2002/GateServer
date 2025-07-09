@@ -9,7 +9,10 @@ class LogicSystem : public Singleton<LogicSystem> {
 public:
     ~LogicSystem();
     bool HandleGet(std::string,std::shared_ptr<HttpConnection>);//处理get请求
-    void ReGet(std::string,HttpHandler handler);//处理get请求
+    bool HandlePost(std::string,std::shared_ptr<HttpConnection>);//处理post请求
+    void RegGet(std::string,HttpHandler handler);//处理get请求
+    void RegPost(std::string url,HttpHandler handler);//处理post请求
+
 private:
     LogicSystem();//构造函数
     // 存储 POST 请求处理函数的映射表

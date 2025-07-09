@@ -8,7 +8,8 @@
 #include "const.h"
 #include "CServer.h"
 int main()
-{
+{   
+    std::cout<<"GateServer start"<<std::endl;
     try
     {
         unsigned short port = static_cast<unsigned short>(8080);//端口
@@ -22,6 +23,7 @@ int main()
             ioc.stop();//异步等待信号量，当信号量触发时，停止io上下文
             });
         std::make_shared<CServer>(ioc, port)->Start();
+        std::cout<<"GateServer start listen port:"<<port<<std::endl;
         ioc.run();//轮询起来
     }
     catch (std::exception const& e)

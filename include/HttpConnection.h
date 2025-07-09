@@ -11,6 +11,7 @@ private:
     void CheckDeadline();//检查超时
     void WriteResponse();//写响应
     void HandleReq();//处理请求
+    void PreParseGetParam();//预处理get参数
     tcp::socket _socket;
     beast::flat_buffer _buffer{8192};//缓冲区
     http::request<http::dynamic_body> _request;//请求
@@ -19,5 +20,7 @@ private:
         _socket.get_executor(),
         std::chrono::seconds(60)
     };//超时定时器
+    std::string _get_url;
+    std::unordered_map<std::string, std::string> _get_params;
 
 };
