@@ -4,7 +4,6 @@
 #include <boost/asio.hpp>
 #include <memory> 
 #include <iostream>
-#include "singleton.h"
 #include <functional>
 #include <map> // 包含map头文件 
 #include <unordered_map>

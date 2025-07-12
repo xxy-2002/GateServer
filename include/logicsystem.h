@@ -1,6 +1,6 @@
 #pragma once
 #include "const.h"
-
+#include "singleton.h"
 class HttpConnection; // 前置声明
 typedef std::function<void(std::shared_ptr<HttpConnection>)> HttpHandler; // 定义HttpHandler类型
 

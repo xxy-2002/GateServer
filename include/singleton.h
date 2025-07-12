@@ -1,3 +1,4 @@
+#pragma once
 #include <memory>
 #include <mutex>
 #include <iostream>
@@ -27,4 +28,4 @@ public:
 };
 
 template <typename T>
-std::shared_ptr<T> Singleton<T>::_instance = nullptr;
+inline static std::shared_ptr<T> _instance = nullptr; // 类内定义，无需类外重复，c++17特性

@@ -5,6 +5,7 @@
 #include <memory>
 #include <ostream>
 #include <string>
+#include "VerifyGrpcClient.h"
 //互相包含的解决办法：在其中一个类的头文件中包含另一个类的前置声明，而不是直接包含其头文件。
 // 这样可以避免相互依赖的问题，确保两个类都可以被正确编译和使用。   
 //在cpp文件中包含.h,解决互相引用
@@ -36,15 +37,16 @@ LogicSystem::LogicSystem() {
         }
         //将json数据加载到root中
         if(!src_root.isMember("email")){
-            std::cout<<"failed to parse Json data!"<<std::endl;
+            std::cout<<"failed to parse Json data!_src_root"<<std::endl;
             root["error"] = ErrorCodes::Error_Json;
             std::string jsonstr = root.toStyledString();
             beast::ostream(connection->_response.body())<<jsonstr;
             return true;
         }
         auto email = src_root["email"].asString();
+        GetVarifyRsp rsp=VerifyGrpcClient::GetInstance()->GetVarifyCode(email);
         std::cout<<"email is "<<email<<std::endl;
-        root["error"]=0;
+        root["error"]=rsp.error();
         root["email"]=src_root["email"];
         std::string jsonstr = root.toStyledString();
         beast::ostream(connection->_response.body()) << jsonstr;

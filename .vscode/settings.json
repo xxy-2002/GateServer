@@ -3,7 +3,6 @@
     "trae.tab.enableAutoImport": false,
 // 是否检查插件冲突
 "clangd.detectExtensionConflicts": true,
-"clangd.path": "clangd",
 // 查找的头文件路径，每一项前缀 -I
 "clangd.arguments": [
         "--all-scopes-completion", // 全局补全(补全建议会给出在当前作用域不可见的索引,插入后自动补充作用域标识符),例如在main()中直接写cout,即使没有`#include <iostream>`,也会给出`std::cout`的建议,配合"--header-insertion=iwyu",还可自动插入缺失的头文件

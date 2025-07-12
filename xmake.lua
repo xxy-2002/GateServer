@@ -1,16 +1,19 @@
 add_rules("mode.debug", "mode.release")
+add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
 add_requires("jsoncpp")
+add_requires("grpc")
 add_includedirs("include")
-
-
+add_requires("boost",{configs = {all = true}})
 target("GateServer")
+    set_languages("c++17")
     add_packages("jsoncpp")
+    add_packages("boost")
+    add_packages("grpc")
     set_kind("binary")
     add_files("src/*.cpp")
-
     -- 需要添加 Windows 套接字库 
     add_syslinks("ws2_32", "mswsock")
-    
+        -- 确保 Boost 路径被正确添加到编译命令
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
