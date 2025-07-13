@@ -1,20 +1,24 @@
 add_rules("mode.debug", "mode.release")
 add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
 add_requires("jsoncpp")
-add_requires("grpc")
+add_requires("protobuf-cpp", "grpc", "openssl")
 add_includedirs("include")
 add_requires("boost",{configs = {all = true}})
 target("GateServer")
     set_languages("c++17")
     add_packages("jsoncpp")
     add_packages("boost")
-    add_packages("grpc")
+    add_packages("protobuf-cpp", "grpc", "openssl")
     set_kind("binary")
     add_files("src/*.cpp")
+    add_files("src/message.pb.cc", "src/message.grpc.pb.cc")
     -- 需要添加 Windows 套接字库 
     add_syslinks("ws2_32", "mswsock")
         -- 确保 Boost 路径被正确添加到编译命令
+        -- 针对 MSVC 编译器添加 /utf-8 选项以消除 C4819 编码警告
+    add_cxflags("/utf-8")
 
+    -- 针对 MSVC 编译器添加 /utf-8 选项以消除 C4819 编码警告
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

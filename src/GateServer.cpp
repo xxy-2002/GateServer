@@ -7,8 +7,12 @@
 #include <json/reader.h>
 #include "const.h"
 #include "CServer.h"
+#include "ConfigMgr.h"
 int main()
 {   
+    ConfigMgr gCfgMgr;
+    std::string gate_port_str = gCfgMgr["GateServer"]["Port"];
+    unsigned short gate_port = atoi(gate_port_str.c_str());
     std::cout<<"GateServer start"<<std::endl;
     try
     {
