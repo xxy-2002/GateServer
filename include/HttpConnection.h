@@ -5,8 +5,12 @@ class HttpConnection:public std::enable_shared_from_this<HttpConnection>
 {
     friend class LogicSystem; // 声明 LogicSystem 为 HttpConnection 的友元类
     public:
-    HttpConnection(tcp::socket socket);
+    HttpConnection(boost::asio::io_context& ioc);
     void Start();
+    tcp::socket& GetSocket(){
+        return _socket;
+    };
+
 private:
     void CheckDeadline();//检查超时
     void WriteResponse();//写响应

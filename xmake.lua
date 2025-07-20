@@ -4,11 +4,13 @@ add_requires("jsoncpp")
 add_requires("protobuf-cpp", "grpc", "openssl")
 add_includedirs("include")
 add_requires("boost",{configs = {all = true}})
+add_requires("hiredis")
 target("GateServer")
     set_languages("c++17")
     add_packages("jsoncpp")
     add_packages("boost")
     add_packages("protobuf-cpp", "grpc", "openssl")
+    add_packages("hiredis")
     set_kind("binary")
     add_files("src/*.cpp")
     add_files("src/message.pb.cc", "src/message.grpc.pb.cc")
@@ -17,7 +19,21 @@ target("GateServer")
         -- 确保 Boost 路径被正确添加到编译命令
         -- 针对 MSVC 编译器添加 /utf-8 选项以消除 C4819 编码警告
     add_cxflags("/utf-8")
+     -- 添加链接库搜索目录，假设hiredis.dll在C:/hiredis/lib目录下
+    add_linkdirs("C:/Users/sheny/AppData/Local/.xmake/packages/h/hiredis/v1.3.0/eb2bb2120d0b41d793ca2984e0fb0eb2/bin") 
+    -- xmake.lua
 
+    -- 添加实际头文件路径
+    -- add_includedirs("D:/cpp_lib_app/mysql-connect-cpp/include")
+    -- add_linkdirs("D:/cpp_lib_app/mysql-connect-cpp/lib64/debug/vs14")
+    -- add_links("mysqlcppconn", "mysqlcppconnx")
+
+    -- after_build(function (target)
+    --     local dll_src = "D:/cpp_lib_app/mysql-connect-cpp/lib64/debug/"
+    --     local dll_dest = target:targetdir()
+    --     os.cp(dll_src .. "mysqlcppconn-10-vs14.dll", dll_dest)
+    --     os.cp(dll_src .. "mysqlcppconnx-2-vs14.dll", dll_dest)
+    -- end)
     -- 针对 MSVC 编译器添加 /utf-8 选项以消除 C4819 编码警告
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

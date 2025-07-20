@@ -1,6 +1,7 @@
 #include "HttpConnection.h"
+#include "boost/asio/io_context.hpp"
 
-HttpConnection::HttpConnection(tcp::socket socket):_socket(std::move(socket))//socket 移动语义构造的原因
+HttpConnection::HttpConnection(boost::asio::io_context & ioc):_socket(ioc)//socket 移动语义构造的原因
 {  
 }
 void HttpConnection::Start()
